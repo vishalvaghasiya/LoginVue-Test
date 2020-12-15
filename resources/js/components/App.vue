@@ -4,21 +4,21 @@
         </div>
         <div class="layout-column col-md-10">
             <div id="main">
-                hi vishal it work
-                <!--<router-view class="col-md-12"></router-view>-->
+                <headerComponent></headerComponent>
+                <router-view class="col-md-12"></router-view>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    // import headerComponent from "./common/headerComponent";
+    import headerComponent from "./common/headerComponent";
+
     export default {
         name: "App",
-        /*components: {
-           'headerComponent' : headerComponent
-        }*/
-
+        components: {
+            'headerComponent': headerComponent
+        },
         mounted() {
             console.log('Component mounted.')
         }

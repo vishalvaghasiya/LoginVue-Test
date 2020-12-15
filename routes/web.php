@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
-/*Route::get('/{view?}', 'PagesController@landing')->where('view', '(.*)')->name('landing');*/
+Route::get('/{view?}', 'PageController@index')->where('view', '(.*)')->name('landing');

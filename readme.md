@@ -444,3 +444,178 @@ Route::group(['api' => 'api'], function () {
     Route::get('/databaseAPI', 'DatabaseController@viewIndex');
 });
 ```
+
+
+---
+---
+---
+---
+---
+
+# Vish New Trick
+---
+Laravel Install  
+Vue add  
+> composer   
+> laravel/ui  
+    
+    npm install    
+    npm run dev
+
+> https://vuetifyjs.com/en/getting-started/installation/#webpack-install 
+        
+    npm install vuetify
+
+    // import Vuetify from 'vuetify/lib'   
+
+```javascript
+import Vue from 'vue'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+
+Vue.use(Vuetify)
+
+const opts = {}
+
+export default new Vuetify(opts)
+```
+
+#### Step 1:  Vuetify Add   resources > plugins >  vuetify.js
+```vue
+import Vue from 'vue';
+import Vuetify from 'vuetify';
+import 'vuetify/dist/vuetify.min.css'
+
+Vue.use(Vuetify);
+
+const options = {};
+
+export default new Vuetify(options);
+
+```
+
+#### routes.js 
+```javascript
+import Vue from 'vue';
+import VueRouter from "vue-router";
+import Home from "./components/Home";
+import DeliveryManagement from "./components/DeliveryManagement";
+
+Vue.use(VueRouter)
+
+export default new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: '/',
+            name: 'home',
+            component: Home
+        },
+        {
+            path: '/deliveryManagement',
+            name: 'DeliveryManagement',
+            component: DeliveryManagement
+        }
+    ]
+});
+
+```
+
+
+### app.js
+```javascript
+require('./bootstrap');
+import Vue from "vue";
+import vuetify from '@/js/plugins/vuetify';
+import routes from '@/js/routes';
+import App from "@/js/views/App";
+
+const app = new Vue({
+    el: '#app',
+    router: routes,
+    vuetify,
+    render: h => h(App)
+})
+export default app;
+
+
+```
+
+
+### views >App.vue
+```vue
+
+<template>
+    <v-app>
+        <v-main>
+            <v-sheet
+                id="scroll-area-1"
+                class="overflow-y-auto mb-10"
+            color="#f5f5f5">
+                <router-view></router-view>
+            </v-sheet>
+            /*<bottom-navigation></bottom-navigation>*/
+        </v-main>
+    </v-app>
+</template>
+
+<script>
+    /*import BottomNavigation from "../components/common/BottomNavigation";*/
+    export default {
+        name: "App",
+        /*components: {BottomNavigation},*/
+    }
+</script>
+``` 
+
+
+#### resources > Component > Home.vue
+
+
+
+### Blade Template /...
+
+```blade
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Laravel</title>
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    {{--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+    <!--Install Material Icons-->
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons" rel="stylesheet">--}}
+</head>
+<body>
+<div id="app">
+</div>
+<script src="{{asset('js/app.js')}}"></script>
+</body>
+</html>
+```
+
+
+#### webpack.mix.js
+
+```javascript
+const mix = require('laravel-mix');
+
+mix.webpackConfig({
+    resolve: {
+        extensions: ['.js' , '.vue'],
+        alias: {
+            '@':`${__dirname}/resources`
+        }
+    }
+})
+
+mix.js('resources/js/app.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css');
+```
+---
+---
+---
+---
+---

@@ -1,72 +1,446 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+<!-- Har Har Mahadev -->
+#### Step 1: Install Laravel 6.0 using composer
+    composer create-project laravel/laravel ProjectName "6.0"
+                vs
+    composer create-project laravel/laravel ProjectName "6.0.*"
+    
+> install Laravel 6.20.0
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+#### Step 2: Install Laravel in scaffolding of vue
+https://laravel.com/docs/7.x/frontend
 
-## About Laravel
+    composer require laravel/ui:^2.4
+    
+Error generated Because laravel 6 and Ui-2.4 is not perfect combination --> work only laravel-7.0 in ui-2
+> so, Laravel 6 in Ui-1.2 worked 
+    
+    composer require laravel/ui:^1.0 --dev
+    php artisan ui vue
+             
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+#### step 3: Install npm
+     npm install
+     npm run dev
+          
+> layouts > app.blade.php
+> pages > home.blade.php
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+> Js Vue Scaffolding
+    
+####step 4: app.js
+```javascript
+require('./bootstrap');
+window.Vue = require('vue');
+import App from "./components/App";
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+const app = new Vue({
+    el: '#app',
+    components: {
+        'vish-component': App
+    }        
+});
+```
 
-## Learning Laravel
+####step 4.1: bootstrap.js
+> don't touch this file and not change any line of code.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+###step 5: App.vue
+```vue
+<template>
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="layout-column col-md-10">
+            <div id="main">
+                <!--<headerComponent></headerComponent>-->
+                Test App.vue Is Working                    
+            </div>
+        </div>
+    </div>
+</template>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<script>
+    /*import headerComponent from "./common/headerComponent";*/
 
-## Laravel Sponsors
+    export default {
+        name: "App",
+        mounted() {
+            console.log('Component mounted.')
+        }
+        /*components: {
+                    'headerComponent': headerComponent
+        },*/
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+    }
+</script>
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
+<style scoped>
+    #main {
+        width: 1000px;
+    }
+</style>
+```
 
-## Contributing
+### step 6: views of Laravel Blade Engine Create index File 
+>views> layouts> app.blade.php
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```html
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <!-- todo: Step 1.0 Add Mixin css File -->
+    <link rel="stylesheet" href="{{asset('css/app.css')}}" type="text/css">
+    {{--Last Step miss--}}
+</head>
 
-## Security Vulnerabilities
+<body>
+<!--todo: Step 2.0 div in Add id like - id="app"
+this id use in app.js in vue instance in     
+components: {el:'app'}
+-->
+<div id="app">
+<!--todo: step 2.1 Add Component in index file refer to app.js instance-->       
+<!--Method 1 direct write here-->
+<vish-component></vish-component>    
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+<!--Method 2 yield using-->
+<!--@yield('content')-->
+</div>
 
-## License
+<!-- todo: Step 1.1 Add Mixin js File -->
+<script type="text/javascript" rel="script" src="{{asset('js/app.js')}}"></script>
+{{--Last Step js--}}
+</body>
+</html>
 
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+
+### step 7: if Method 2 use - yield using component declare
+```blade
+@extends('layouts.app')
+@section('content')
+    <vish-component></vish-comp>
+@endsection
+```   
+
+#### step 8: PageController Create and router using pass index page
+    php artisan make:controller PageController
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class PageController extends Controller
+{
+    public function index(){
+        return view('pages.home');
+    }
+}
+```      
+
+#### step 9: web.php in route declare
+> all route declaration remove only add this
+
+    Route::get('/{view?}', 'PageController@index')->where('view', '(.*)')->name('landing');
+ 
+
+
+
+
+---
+---
+---
+---
+Finally working Vue Front End in chrome 
+
+---
+
+##step 10: Vue-router Install using Npm
+> Add Vue router using npm
+  https://router.vuejs.org/installation.html
+
+    npm install vue-router
+    
+> app.js in add vue router
+```javascript
+/*todo : s1 import */
+    import VueRouter from 'vue-router'
+    import Routes from "./routes";
+
+/*todo : s2 use */
+    Vue.use(VueRouter)
+
+/*todo : s3 instance create */
+   const routeConst = new VueRouter({
+        routes: Routes,
+        mode: 'history',
+    });
+
+/*todo : s4 router declare in vue Instance */
+const app = new Vue({
+    router: routeConst,
+});
+```
+
+  
+  
+    
+
+    
+ 
+    
+---
+```javascript
+require('./bootstrap');
+window.Vue = require('vue');
+import App from "./components/App";
+
+import VueRouter from "vue-router";
+import Routes from "./routes";
+
+Vue.use(VueRouter);
+
+const routeConst = new VueRouter({
+    routes: Routes,
+    mode: 'history',
+});
+
+//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+const app = new Vue({
+    el: '#app',
+    components: {
+        'vish-component': App
+    },
+    router: routeConst,
+});
+
+```
+
+####step 11: routes.js
+```javascript
+import loginComponent from "./components/pages/loginComponent";
+import registerComponent from "./components/pages/registerComponent";
+
+export default [
+    {path: '/', component: loginComponent},
+    {path: '/register', component: registerComponent},
+]
+
+```
+
+#### Step 12: App.vue
+    
+    <router-view class="col-md-12"></router-view>
+    
+
+####Step 13: headerComponent.vue 
+>resources >js >components >common >headerComponent.vue
+```vue
+<template>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Login Vue</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <router-link to="/" class="nav-link">
+                            Login
+                        </router-link>
+                        <!--                        <a class="nav-link" href="#">Login <span class="sr-only">(current)</span></a>-->
+                    </li>
+                    
+
+                    <li class="nav-item">
+                        <router-link to="/register" class="nav-link"> Reg</router-link>
+                        <!--<a class="nav-link" href="#">Register</a>-->
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: "headerCustom"
+    }
+</script>
+
+<style scoped>
+
+</style>
+```
+
+
+#### step 14: App.vue in Add router-view & locally Component
+```vue
+
+
+<div id="main">
+    <headerComponent></headerComponent>
+    <router-view class="col-md-12"></router-view>
+</div>
+
+<script>
+    import headerComponent from "./common/headerComponent";
+
+    export default {
+        name: "App",
+        components: {
+            'headerComponent': headerComponent
+        }
+    }
+</script>
+```
+
+#### step 15: loginComponent.vue
+```vue
+<template>
+    <div class="bg-black">
+        <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: "loginComponent"
+    }
+</script>
+```
+
+#### step 16: registerComponent.vue
+```vue
+code
+```
+
+### step 17 : Database Migration
+
+> 2014_10_12_000000_create_users_table.php
+```
+public function up()
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->integer('phone')->unique();
+            $table->rememberToken();
+            $table->timestamps();
+        });
+    }
+
+ public function down()
+    {
+        Schema::dropIfExists('users');
+    }
+```
+
+>defaultStringLength(191) set in AppServiceProvider  
+>path --> app -- Providers -- AppServiceProvider.php in boot()
+```
+use Illuminate\Support\Facades\Schema;
+
+public function boot()
+    {
+        Schema::defaultStringLength(191);
+    }
+}
+```
+
+>.env file in database configuration add
+  
+     php artisan migrate
+
+
+
+---------
+#### step 18: This Database store Route declare in web.php
+```
+Route::group(['api' => 'api'], function () {
+    Route::group(['prefix' => 'database'], function () {
+        Route::post('/store', 'DatabaseController@store')->name('databaseStore');      // done
+    });
+});
+
+Route::get('/{view?}', 'PagesController@landing')->where('view', '(.*)')->name('landing');
+
+// vue router in only front end view  -- route declare
+// databse connection get post router declare in web.php
+``` 
+
+#### step 19:  axios POST by default add laravel vue scaffolding
+```
+ axios.post('/database/store', {
+                    table: currentObj.tableName,
+                    modelStatus: currentObj.createModel,
+                    rowData: currentObj.columns
+                }).then(function (response) {
+                    console.log(JSON.stringify(response));
+                    currentObj.output = response.data;
+                }).catch(function (error) {
+                    console.log(error);
+                });
+```
+
+
+```
+//Database Routes
+    Route::get('/databaseAPI', 'DatabaseController@viewIndex');
+    Route::get('/viewSchema/{tableName}', 'DatabaseController@viewSchema');
+
+```
+
+#### step 20:  axios Get by default add laravel vue scaffolding
+```
+getPost() {
+        axios.get('/databaseAPI')
+            .then(response => {
+                let tables = this.differenciate(response.data.table, response.data.dataType);
+                let dataType = this.differenciate(response.data.table, tables);
+
+                this.tables = tables;
+                this.dataTypes = dataType;
+                // confirm(tables); confirm(dataType);
+                // console.log(JSON.stringify(response.data.table));
+                // console.log(JSON.stringify(response.data.dataType));
+                // console.log('working axios');
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        //.then(function (response) {
+        /*this.posts = response.data.data;
+        this.breadatas = response.data.dataType;*/
+    },
+```
+
+#### web.php
+```
+Route::group(['api' => 'api'], function () {
+    Route::get('/databaseAPI', 'DatabaseController@viewIndex');
+});
+```

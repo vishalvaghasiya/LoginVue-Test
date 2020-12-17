@@ -15,7 +15,7 @@
                         </router-link>
                         <!--                        <a class="nav-link" href="#">Login <span class="sr-only">(current)</span></a>-->
                     </li>
-                    g
+                    
 
                     <li class="nav-item">
                         <router-link to="/register" class="nav-link"> Reg</router-link>
